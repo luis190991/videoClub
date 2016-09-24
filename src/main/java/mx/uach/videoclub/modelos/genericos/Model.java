@@ -13,6 +13,8 @@ import java.util.List;
 public class Model {
     
     public static final String Q_WHRE_ID = "WHERE id = ";
+    
+    public static final String Q_WHRE = "";
 
     private Integer id;
 

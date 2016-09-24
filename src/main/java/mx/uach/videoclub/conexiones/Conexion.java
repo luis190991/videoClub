@@ -16,7 +16,8 @@ public class Conexion {
 
     private final static String USUARIO = "root";
     private final static String PASSWORD = "";
-    private final static String CONEXION = "jdbc:mysql://localhost:3306/db_video";
+    private final static String CONEXION =
+            "jdbc:mysql://localhost:3306/db_video?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static Conexion INSTANCE;
     private Connection con;
 
@@ -26,7 +27,7 @@ public class Conexion {
 
     private void initConection() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(CONEXION, USUARIO, PASSWORD);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
