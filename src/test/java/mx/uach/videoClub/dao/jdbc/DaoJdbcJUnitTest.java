@@ -2,6 +2,7 @@ package mx.uach.videoClub.dao.jdbc;
 
 import java.util.List;
 import mx.uach.videoclub.dao.VideoDao;
+import mx.uach.videoclub.dao.enums.CRUD;
 import mx.uach.videoclub.dao.jdbc.VideoDaoJDBC;
 import mx.uach.videoclub.modelos.Director;
 import org.junit.Test;
@@ -13,10 +14,9 @@ import static org.junit.Assert.*;
  * @author Luis Antonio Ramirez
  */
 public class DaoJdbcJUnitTest {
+    
+    
 
-    public DaoJdbcJUnitTest() {
-        
-    }
     
     @Test
     public void directorByIdTest(){
@@ -40,7 +40,52 @@ public class DaoJdbcJUnitTest {
         
         
         List<Director> directores = dao.getDirectoresByCriteria("");
-        assertEquals(3, directores.size());
+        //assertEquals(3, directores.size());
+        
+    }
+    
+   /* @Test
+    public void makeDirector(){
+        VideoDao dao = new VideoDaoJDBC();
+        dao.directorProcess(new Director("Tim Burton"), CRUD.CREATE);
+        
+        Director d = dao.getDirectorById(4);
+        assertNotNull(d);
+        assertEquals(d.getNombre(), "Tim Burton");
+
+    }*/
+    
+    
+    @Test
+    public void updateDirector(){
+        VideoDao dao = new VideoDaoJDBC();
+       
+        Director d = dao.getDirectorById(3);
+        assertNotNull(d);
+        
+        d.setNombre("David Yates");
+        dao.directorProcess(d, CRUD.UPDATE);
+        
+        d = dao.getDirectorById(3);
+        assertNotNull(d);
+        assertEquals(d.getNombre(), "David Yates");
+
+
+    }
+    
+    
+    @Test
+    public void deleteDirector(){
+        VideoDao dao = new VideoDaoJDBC();
+       
+        Director d = dao.getDirectorById(6);
+        assertNotNull(d);
+        
+       
+        dao.directorProcess(d, CRUD.DELETE);
+        
+        d = dao.getDirectorById(6);
+        assertNull(d);
         
     }
 
